@@ -46,7 +46,7 @@
 }
 .signInButton{
     width: 200px;
-    margin: auto;
+    margin: 1rem auto;
     height: 100%;
     border: 1px solid white;
     background-color: #3579b07d;
