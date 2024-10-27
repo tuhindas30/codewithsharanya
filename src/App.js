@@ -17,6 +17,9 @@ function App() {
     <BrowserRouter>
      <div className='imageClass'></div>
      <Header />
+     <div className='container'> 
+
+     
       <Routes>
         <Route path='/' element={<Login/>}> </Route>
         <Route path='/Tutor/Home' element = {<TutorHome />}></Route>;
@@ -29,7 +32,8 @@ function App() {
         <Route path='/Student/FirstHome' element = {<StudentFirstHome />}></Route>;
 
       </Routes>
-      {/* <Footer/> */}
+      </div>
+      <Footer/>
       
     </BrowserRouter>
   );

@@ -9,10 +9,7 @@ const Footer = () =>{
               <a className="btn btn-outline-light btn-floating m-1" href="https://github.com/sharanya629" role="button"><i className="bi bi-github"></i></a>
             </section>
           </div>
-          <div className="bg-dark text-center text-white opacity-75 p copywrite">
-            © 2024 
-            
-          </div>
+          
         </footer> 
     );
 }
