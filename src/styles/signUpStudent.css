@@ -29,14 +29,11 @@
 .errorDiv{
     color: red;
     font-size: 14px;
-    width: 80%;
+    width: 100%;
     font-style: oblique;
     justify-content: left;
 }
-.errorDiv p {
-    color: #ffffff !important;
-    font-weight: 900 !important;
-}
+
 .customMarginTop{
     margin-top: 1%;
 }

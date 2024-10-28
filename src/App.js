@@ -15,9 +15,9 @@ import TutorNotifications from './components/TutorNotifications';
 function App() {
   return (
     <BrowserRouter>
-     <div className='imageClass'></div>
+     
      <Header />
-     <div className='container'> 
+     <div className='bodyContainer'> 
 
      
       <Routes>

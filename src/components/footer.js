@@ -1,7 +1,7 @@
 import React from 'react';
 const Footer = () =>{
     return(
-        <footer className="bg-dark text-center text-white opacity-75 customfooter">
+        <footer className="bg-body-secondary text-center">
           <div className="container py-2">
             <section>
               
