@@ -281,7 +281,8 @@
   }
 
   .bodyContainer {
-    min-height: calc(100vh - 4rem)
+    min-height: calc(100vh - 4rem);
+    padding-block: 2rem;
   }
  
   .button-card {

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import TutorSignupForm from "./TutorSignupForm";
+import TutorSignupForm from "./TutorSignupForm.jsx";
 
 import "../styles/login.css";
-import StudentSignupForm from "./StudentSignupForm";
-import SigninForm from "./SigninForm";
+import StudentSignupForm from "./StudentSignupForm.jsx";
+import SigninForm from "./SigninForm.jsx";
 
 const Login = () => {
   const [signupType, setSignupType] = useState("STUDENT");
