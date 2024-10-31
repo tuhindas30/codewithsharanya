@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import Button from './buttonLogin';
-import { TutorCard } from './tutor_card';
+
 import { useNavigate } from 'react-router-dom';
 export default function TutorHome() {
     const [masterData, setMasterData] = useState([]);

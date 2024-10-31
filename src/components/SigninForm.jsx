@@ -44,7 +44,7 @@ const SigninForm = () => {
     }
 
     const shouldEnableSubmitButton = () => {
-        return !formErrors.email && !formErrors.password;
+        return formValues.email && formValues.password && !formErrors.email && !formErrors.password;
     }
 
     const handleSubmit = (e) => {

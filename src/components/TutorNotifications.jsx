@@ -1,8 +1,6 @@
-import React,{useEffect, useState} from 'react';
-import Button from './buttonLogin';
-import Option from './option';
 
-import { Cards } from './cards';
+import Button from './buttonLogin';
+
 
 
 export default function TutorNotifications() {
