@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter,  Route, Routes } from 'react-router-dom';
+import AdminPanel from './components/AdminPanel';
 
 import Login from './components/login';
 import { Header } from './components/header';
@@ -24,12 +25,14 @@ function App() {
         <Route path='/' element={<Login/>}/>;
         <Route path='/Tutor/Home' element = {<TutorHome />}/>;
         <Route path='/Tutor/Notifications' element = {<TutorNotifications />}/>;
+        <Route path='/Tutor/Profile' element = {<TutorProfile />}/>;
 
         <Route path='/Student/Home' element = {<StudentHome />}/>;
         <Route path='/Student/Notifications' element = {<StudentNotifications />}/>;
+        <Route path='/admin' element = {<AdminPanel />}/>;
         
-        <Route path='/Tutor/Profile' element = {<TutorProfile />}/>;
       
+        
 
       </Routes>
       </div>
