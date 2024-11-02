@@ -12,6 +12,7 @@ import TutorProfile from './components/tutorProfile';
 
 import StudentNotifications from './components/studentNotifications';
 import TutorNotifications from './components/TutorNotifications';
+import StudentProfile from './components/StudentProfile';
 
 function App() {
   return (
@@ -23,12 +24,14 @@ function App() {
      
       <Routes>
         <Route path='/' element={<Login/>}/>;
-        <Route path='/Tutor/Home' element = {<TutorHome />}/>;
-        <Route path='/Tutor/Notifications' element = {<TutorNotifications />}/>;
-        <Route path='/Tutor/Profile' element = {<TutorProfile />}/>;
+        <Route path='/tutor/home' element = {<TutorHome />}/>;
+        <Route path='/tutor/notifications' element = {<TutorNotifications />}/>;
+        <Route path='/tutor/profile' element = {<TutorProfile />}/>;
 
-        <Route path='/Student/Home' element = {<StudentHome />}/>;
-        <Route path='/Student/Notifications' element = {<StudentNotifications />}/>;
+        <Route path='/student/home' element = {<StudentHome />}/>;
+        <Route path='/student/notifications' element = {<StudentNotifications />}/>;
+        <Route path='/student/profile' element = {<StudentProfile />}/>;
+
         <Route path='/admin' element = {<AdminPanel />}/>;
         
       

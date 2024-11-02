@@ -4,83 +4,222 @@ import '../styles/tutorProfile.css';
 import Button from './buttonLogin';
 
 export default function TutorProfile() {
-    const navigate = useNavigate();
-    const [subjects, setSubjects] = useState('WPL, AOS, Maths');
-    const [profilePic, setProfilePic] = useState();
-    const [city, setCity] = useState('Dallas');
-    const [dstate,setDstate] = useState('Texas');
-    const [country,setCountry] = useState('USA');
-    const [aboutMe,setAboutMe] = useState('I love Teaching WPL and.. Advanced Operationg Systems...');
-
-    const handleSubjects = (e) => {
-        setSubjects(e.target.value);
-    }
-
-    const handleProfilePic = (e) => {
-        console.log(e.target.files)
-        setProfilePic(URL.createObjectURL(e.target.files[0]));
-    }
-
-    const handleCity= (e) =>{
-        setCity(e.target.value);
-    }
-
-    const handleState= (e) =>{
-        setDstate(e.target.value);
-    }
-
-    const handleCountry= (e) =>{
-        setCountry(e.target.value);
-    }
-
-    const handleAboutMe= (e) =>{
-        setAboutMe(e.target.value);
-    }
-    const handleOnBackClick = () =>{
-        navigate('/Tutor/Home');
-    }
+    const [formValues, setFormValues] = useState({
+        fullName: "",
+        email: "",
+        bio: "",
+        phoneNo: "",
+        location: "",
+        subject: "",
+        tutionFee: "",
+        
+      });
+      const [formErrors, setFormErrors] = useState({
+        email: false,
+        phoneNo: false,
+        tutionFee: false,
+        
+      });
+      
+    
+      const emailPattern = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]');
+      const pwdPattern = new RegExp("[a-z0-9A-Z][A-Za-z\d@$!%*?&]{6,}");
+      const phoneNoPattern = new RegExp("^\\d{10}$");
+      const numberPattern = new RegExp("^\\d+$");
+    
+      const handleInputChange = (e) => {
+        switch (e.target.name) {
+          case "fullName":
+            setFormValues({ ...formValues, fullName: e.target.value });
+            break;
+          case "email":
+            setFormValues({ ...formValues, email: e.target.value });
+            if (emailPattern.test(e.target.value)) {
+              setFormErrors({ ...formErrors, email: false });
+            } else {
+              setFormErrors({ ...formErrors, email: true });
+            }
+            break;
+          case "bio":
+            setFormValues({ ...formValues, bio: e.target.value });
+            break;
+          case "phoneNo":
+            setFormValues({ ...formValues, phoneNo: e.target.value });
+            if (phoneNoPattern.test(e.target.value)) {
+              setFormErrors({ ...formErrors, phoneNo: false });
+            } else {
+              setFormErrors({ ...formErrors, phoneNo: true });
+            }
+            break;
+          case "location":
+            setFormValues({ ...formValues, location: e.target.value });
+            break;
+          case "subject":
+            setFormValues({ ...formValues, subject: e.target.value });
+            break;
+          case "tutionFee":
+            setFormValues({ ...formValues, tutionFee: e.target.value });
+            if (numberPattern.test(e.target.value)) {
+              setFormErrors({ ...formErrors, tutionFee: false });
+            } else {
+              setFormErrors({ ...formErrors, tutionFee: true });
+            }
+            break;
+          
+          default:
+            break
+        }
+      }
+    
+      const shouldEnableSubmitButton = () => {
+        return (
+          !formErrors.email || !formErrors.phoneNo || !formErrors.tutionFee
+        );
+      }
+    
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(formValues);
+        if (!shouldEnableSubmitButton()) return;
+        
+      }
   return (
-      <>
-      <nav className="navbar navbar-expand-sm bg-info navbar-dark bg-dark ps-5 pe-5 navblack">
-                <div className="collapse navbar-collapse justify-content-end pe-3"> 
-                        <Button name="Profile"/>
-                        <Button name="Log Out"/>   
-                </div>                   
-        </nav>   
-     <div className='mainContainer'>
-     <img src='/images/shamma.png' alt='Profile Pic' className='profilePic'></img>
-    <div className='profileContainer'>
-    <div className='inputWrapper firstNameContainer'>
-        <i className="bi bi-bookmark-check-fill"></i>
-        <input className='input' value={city} type='text' onChange={handleCity} placeholder="City"></input>
+    <>
+    <h1 className='text-center mb-5'>Update Tutor Details</h1>
+    <div className='d-flex justify-content-center'>  
+    
+    <form class="d-flex flex-column needs-validation" style={{ gap: "1rem" }} onSubmit={handleSubmit} noValidate>
+    <div>
+      <label for="inputFullName" class="form-label">
+        Full Name*
+      </label>
+      <input
+        id="inputFullName"
+        name="fullName"
+        className="form-control"
+        type="text"
+        placeholder="John Doe"
+        value={formValues.fullName}
+        onChange={handleInputChange}
+        required
+      />
     </div>
-    <div className='inputWrapper firstNameContainer'>
-        <i className="bi bi-bookmark-check-fill"></i>
-        <input className='input' value={dstate} type='text' onChange={handleState} placeholder="State"></input>
+    <div>
+      <label htmlFor="inputEmail" className="form-label">
+        Email*
+      </label>
+      <input
+        id="inputEmail"
+        name="email"
+        className={`form-control ${formValues.email && (formErrors.email ? "is-invalid" : "is-valid")}`}
+        type="email"
+        placeholder="john@example.com"
+        value={formValues.email}
+        onChange={handleInputChange}
+        required
+      />
+      {formValues.email && formErrors.email && <div className="form-text text-danger fst-italic">
+        Please enter a valid email.
+      </div>}
     </div>
-    <div className='inputWrapper firstNameContainer'>
-        <i className="bi bi-bookmark-check-fill"></i>
-        <input className='input' value={country} type='text' onChange={handleCountry} placeholder="Country"></input>
+    <div>
+      <label for="inputBio" class="form-label">
+        Bio*
+      </label>
+      <textarea
+        id="inputBio"
+        name="bio"
+        class="form-control"
+        type="bio"
+        placeholder="I am a tutor ..."
+        value={formValues.bio}
+        onChange={handleInputChange}
+        required
+      />
     </div>
-    <div className='inputWrapper firstNameContainer'>
-        <i className="bi bi-bookmark-check-fill"></i>
-        <input className='input' value={subjects} type='text' onChange={handleSubjects} placeholder="Enter Subjects you wish to teach"></input>
+    <div class="d-flex justify-content-between" style={{ gap: "1rem" }}>
+      <div style={{ flex: 1 }}>
+        <label htmlFor="inputPhoneNo" className="form-label">
+          Phone Number*
+        </label>
+        <input
+          id="inputPhoneNo"
+          name="phoneNo"
+          className={`form-control ${formValues.phoneNo && (formErrors.phoneNo ? "is-invalid" : "is-valid")}`}
+          type="tel"
+          placeholder="1234567890"
+          value={formValues.phoneNo}
+          onChange={handleInputChange}
+          required
+        />
+        {formValues.phoneNo && formErrors.phoneNo && <div className="form-text text-danger fst-italic">
+          Please enter 10 digit mobile number.
+        </div>}
+      </div>
+      <div style={{ flex: 1 }}>
+        <label for="inputLocation" class="form-label">
+          Location*
+        </label>
+        <input
+          id="inputLocation"
+          name="location"
+          class="form-control"
+          type="text"
+          placeholder="City, State"
+          value={formValues.location}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
     </div>
-    <div className='inputWrapper firstNameContainer'>
-        <i className="bi bi-bookmark-check-fill"></i>
-        <input className='input' value={aboutMe} type='text' onChange={handleAboutMe} placeholder="Tell Something about yourself"></input>
+    <div class="d-flex justify-content-between" style={{ gap: "1rem" }}>
+      <div style={{ flex: 1 }}>
+        <label for="inputSubject" class="form-label">
+          Subject*
+        </label>
+        <input
+          id="inputSubject"
+          name="subject"
+          class="form-control"
+          type="text"
+          placeholder="Maths, Science"
+          value={formValues.subject}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+      <div style={{ flex: 1 }}>
+        <label for="inputTutionFee" class="form-label">
+          Tution Fee*
+        </label>
+        <input
+          id="inputTutionFee"
+          name="tutionFee"
+          class="form-control"
+          type="text"
+          placeholder="1000"
+          value={formValues.tutionFee}
+          onChange={handleInputChange}
+          required
+        />
+        {formValues.tutionFee && formErrors.tutionFee && <div className="form-text text-danger fst-italic">
+          Tution Fee should be a number.
+        </div>}
+      </div>
     </div>
-    {/* <div className='inputWrapper'>
-        <i className="bi bi-person-plus-fill"></i>
-        <input className='input' value={profilePic} type='file' accept="image/png, image/jpeg" onChange={handleProfilePic} placeholder="Insert Profile Pic"></input>
-    </div> */}
-    <div className='signInButtonContainer customMarginTop'>
-    {/* <button className={`signInButton ${shouldEnableSubmitButton()?``:`disable`}`} onClick={handleOnSubmit}>Submit</button> */}
-    <button className={`signInButton backButton`} onClick={handleOnBackClick}><i className="bi bi-caret-left-fill"></i></button>
-    </div>               
-    </div>
-    </div>
-    </>
+    
+    
+    
+    <button
+      type="submit"
+      className="btn btn-primary"
+      disabled={!shouldEnableSubmitButton()}
+    >
+      Update
+    </button>
+  </form>
+  </div>
+  </>
 
   )
 }
