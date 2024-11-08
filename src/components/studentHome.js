@@ -12,7 +12,7 @@ export default function StudentHome() {
     });
     const navigate = useNavigate()
     useEffect(() => {
-        fetch("/data/tutors.json",
+        fetch("http://localhost:8080/requests/tutor",
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -20,8 +20,7 @@ export default function StudentHome() {
                 }
             }).then((response) => response.json())
             .then((results) => {
-                setMasterData(results.Tutors);
-                setFilterData(results.Tutors);
+                console.log(results);
             })
             .catch((error) => {
                 console.log("error", error);
