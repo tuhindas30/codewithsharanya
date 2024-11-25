@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthProvider';
 
 const SigninForm = () => {
     const [formValues, setFormValues] = useState({
@@ -10,6 +11,7 @@ const SigninForm = () => {
         email: false,
         password: false,
     });
+    const {signin}=useAuth();
     const navigate = useNavigate();
 
 
@@ -46,13 +48,15 @@ const SigninForm = () => {
 
     const shouldEnableSubmitButton = () => {
         return formValues.email && formValues.password && !formErrors.email && !formErrors.password;
+
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         console.log(formValues);
         if (!shouldEnableSubmitButton()) return;
-        // navigate('/Student/FirstHome')
+        await signin(formValues);
+        navigate('/student/home')
     }
 
 

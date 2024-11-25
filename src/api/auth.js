@@ -2,6 +2,7 @@ import axios from "axios";
 import { BASE_URL, handleApiError } from "./helper";
 
 const url = `${BASE_URL}/auth`;
+console.log(url);
 
 const signin = async (email, password) => {
   try {
@@ -12,12 +13,15 @@ const signin = async (email, password) => {
   }
 };
 
-const signup = async (username, email, password) => {
+const signup = async (name, email, mobile, location, password, role) => {
   try {
     const { data } = await axios.post(`${url}/signup`, {
-      username,
+      name,
       email,
+      mobile,
+      location,
       password,
+      role
     });
     return data;
   } catch (err) {

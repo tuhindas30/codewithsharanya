@@ -9,7 +9,8 @@ import { setupAuthExceptionHandler, setupAuthHeader } from "../utils/helper";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const token = JSON.parse(localStorage?.getItem("__auth_token")) || null;
+  const token = (localStorage?.getItem("__auth_token")) || null;
+  console.log(token);
 //   const user = JSON.parse(localStorage?.getItem("__auth_user")) || null;
 //   const [isUserLoading, setUserLoading] = useState(false);
   const [tokenExpiry, setTokenExpiry] = useState(null);
@@ -47,9 +48,9 @@ const AuthProvider = ({ children }) => {
     return token;
   };
 
-  const signup = async ({ username, email, password }) => {
+  const signup = async ({ fullName, email, phoneNo, location, confirmPassword, role }) => {
     try {
-      await authApi.signup(username, email, password);
+      await authApi.signup(fullName, email, phoneNo, location, confirmPassword, role);
     } catch (err) {
       alert(err.message);
     }
@@ -58,17 +59,18 @@ const AuthProvider = ({ children }) => {
   const signin = async ({ email, password }) => {
     try {
       const response = await authApi.signin(email, password);
-      if (response.status === "SUCCESS") {
+      console.log(response);
+      
         // localStorage?.setItem(
         //   "__auth_user",
         //   JSON.stringify(response.data.user)
         // );
         localStorage?.setItem(
           "__auth_token",
-          JSON.stringify(response.data.token)
+          response
         );
-        setupAuthHeader(response.data.token);
-      }
+        setupAuthHeader(response);
+      
     } catch (err) {
       alert(err.message);
     }

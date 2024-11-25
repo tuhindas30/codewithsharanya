@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthProvider";
 
 export const Header = () => {
+  const{signout}=useAuth();
   return (
     <nav className="navbar navbar-expand-lg px-5 bg-body-secondary">
       <div className="container-fluid justify-content-between">
@@ -29,7 +31,7 @@ export const Header = () => {
                 </span>
               </Link>
               <Link className="nav-link" to="/Student/Profile">Profile</Link>
-              <button className="nav-link">Logout</button>
+              <button className="nav-link" onClick={signout}>Logout</button>
             </div>
           </div>
         </div>

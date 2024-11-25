@@ -1,14 +1,1 @@
-As per requirement document, the Admin requirement was not mentioned , please refer to user story 1 in requirement document.
-
-eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoMCIsImV4cCI6MTczMDE5MDQ4NiwidXNlcklkIjoxLCJ1c2VybmFtZSI6InBvc3RncmVzIn0.k0pBBLAwmySOcb2RGH25651HAOilFwh3GFdVqouFvQs
-
-
-    "id": 901,
-    "name": "sundara",
-    "email": "sundara@gmail.com",
-    "mobile": "9089776657",
-    "location": "Goa",
-    "password": "Qwertyuio2!",
-    "role": "Student"
-}
-
+/node_modules

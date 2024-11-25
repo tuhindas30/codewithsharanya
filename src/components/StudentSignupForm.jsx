@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthProvider";
 
 const StudentSignupForm = () => {
   const [formValues, setFormValues] = useState({
     fullName: "",
     email: "",
     phoneNo: "",
+    location:"",
     password: "",
     confirmPassword: "",
   });
@@ -16,6 +18,7 @@ const StudentSignupForm = () => {
     password: false,
     confirmPassword: false,
   });
+  const { token, signup } = useAuth();
   const navigate = useNavigate();
 
   const emailPattern = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]');
@@ -24,7 +27,7 @@ const StudentSignupForm = () => {
 
   const handleInputChange = (e) => {
     switch (e.target.name) {
-      case "fullName":
+      case "name":
         setFormValues({ ...formValues, fullName: e.target.value });
         break;
       case "email":
@@ -36,7 +39,7 @@ const StudentSignupForm = () => {
           setFormErrors({ ...formErrors, email: true });
         }
         break;
-      case "phoneNo":
+      case "mobile":
         setFormValues({ ...formValues, phoneNo: e.target.value });
         if (phoneNoPattern.test(e.target.value)) {
           setFormErrors({ ...formErrors, phoneNo: false });
@@ -45,6 +48,10 @@ const StudentSignupForm = () => {
           setFormErrors({ ...formErrors, phoneNo: true });
         }
         break;
+        case "location":
+        setFormValues({ ...formValues, location: e.target.value });
+        break;
+        
       case "password":
         setFormValues({ ...formValues, password: e.target.value });
         // if (pwdPattern.test(e.target.value)) {
@@ -76,11 +83,12 @@ const StudentSignupForm = () => {
     );
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formValues);
     if (!shouldEnableSubmitButton()) return;
-    navigate('/Student/FirstHome')
+    await signup({ ...formValues, role: "Student" })
+    navigate('/student/home')
   }
 
   return (
@@ -91,7 +99,7 @@ const StudentSignupForm = () => {
         </label>
         <input
           id="inputFullName"
-          name="fullName"
+          name="name"
           className="form-control"
           type="text"
           placeholder="John Doe"
@@ -124,7 +132,7 @@ const StudentSignupForm = () => {
         </label>
         <input
           id="inputPhoneNo"
-          name="phoneNo"
+          name="mobile"
           className={`form-control ${formValues.phoneNo && (formErrors.phoneNo ? "is-invalid" : "is-valid")}`}
           type="tel"
           placeholder="1234567890"
@@ -135,6 +143,21 @@ const StudentSignupForm = () => {
         {formValues.phoneNo && formErrors.phoneNo && <div className="form-text text-danger fst-italic">
           Please enter 10 digit mobile number.
         </div>}
+      </div>
+      <div style={{ flex: 1 }}>
+        <label for="inputLocation" class="form-label">
+          Location*
+        </label>
+        <input
+          id="inputLocation"
+          name="location"
+          class="form-control"
+          type="text"
+          placeholder="City, State"
+          value={formValues.location}
+          onChange={handleInputChange}
+          required
+        />
       </div>
       <div>
         <label htmlFor="inputPassword" className="form-label">
