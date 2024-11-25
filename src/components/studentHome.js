@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Card from './Card'; 
+
+import { useEffect, useState } from 'react';
+import Card from './Card';
 
 
 export default function StudentHome() {
-    const [masterData, setMasterData] = useState([]);
-    const [filterData, setFilterData] = useState([]);
+
     const [search, setSearch] = useState({
-        subject:'',
-        location:'',
+        subject: '',
+        location: '',
     });
-    const navigate = useNavigate()
+
     useEffect(() => {
-        fetch("http://localhost:8080/requests/tutor",
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            }).then((response) => response.json())
+        fetch("http://localhost:8080/requests/student/11",{
+            headers:{
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGFua2FyYUBnbWFpbC5jb20iLCJpYXQiOjE3MzIyOTE4MTYsImV4cCI6MTczMjMyNzgxNn0.dEHqf2CEY5ZFNQRZbpu1M8U8-7eTpX8vQOAheHD6PXI",
+                "Content-Type":"application/json"
+            }
+        }
+            ).then((response) => response.json())
             .then((results) => {
                 console.log(results);
             })
@@ -29,29 +28,25 @@ export default function StudentHome() {
 
 
 
-    const handleInputChange = (e, type)=> {
-        switch(type){
+    const handleInputChange = (e, type) => {
+        switch (type) {
             case 'subject':
-              setSearch({...search, subject: e.target.value})
-              break;
-            case'location':
-              setSearch({...search, location: e.target.value})
-              break;
+                setSearch({ ...search, subject: e.target.value })
+                break;
+            case 'location':
+                setSearch({ ...search, location: e.target.value })
+                break;
             default:
-              break;
+                break;
         }
     }
 
-    const filterList = (value) => {
-        let filteredValues = masterData.filter(o =>
-            Object.keys(o).some(k => `${o[k]}`.toLowerCase().includes(value.toLowerCase())));
-        setFilterData(filteredValues)
-    }
-    
+
+
 
     return (
         <div className='App'>
-            
+
             <div class="input-group" style={{ width: '50%', margin: 'auto' }}>
                 <input type="text" class="form-control" placeholder="Search Subject" onChange={(e) => handleInputChange(e, 'subject')} />
                 <input type="text" class="form-control" placeholder="Search Location" onChange={(e) => handleInputChange(e, 'location')} />
@@ -59,14 +54,11 @@ export default function StudentHome() {
             </div>
 
             <div className="d-flex justify-content-between" style={{ gap: '2rem', padding: '4rem' }}>
-                {filterData.map((tutor) => {
-                    return (
-                        <Card key={tutor.tutorName} tutor={tutor} />
-                    )
-                })}
+                <Card/>
+
             </div>
         </div>
-        
+
 
     );
 }

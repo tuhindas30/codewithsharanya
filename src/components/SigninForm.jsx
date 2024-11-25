@@ -14,7 +14,7 @@ const SigninForm = () => {
 
 
     const emailPattern = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]');
-    const pwdPattern = new RegExp("[a-z0-9A-Z][A-Za-z\d@$!%*?&]{6,}");
+    // const pwdPattern = new RegExp("[a-z0-9A-Z][A-Za-z\d@$!%*?&]{6,}");
 
     const handleInputChange = (e) => {
         switch (e.target.name) {
@@ -29,14 +29,15 @@ const SigninForm = () => {
                 break;
             case "password":
                 setFormValues({ ...formValues, password: e.target.value });
-                if (pwdPattern.test(e.target.value)) {
-                    setFormErrors({ ...formErrors, password: false });
+                // if (pwdPattern.test(e.target.value)) {
+                //     setFormErrors({ ...formErrors, password: false });
 
-                }
-                else {
-                    setFormErrors({ ...formErrors, password: true });
-                    ;
-                }
+                // }
+                // else {
+                //     setFormErrors({ ...formErrors, password: true });
+                //     ;
+                // }
+                setFormErrors({ ...formErrors, password: false });
                 break;
             default:
                 break

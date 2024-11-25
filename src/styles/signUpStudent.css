@@ -1,31 +1,3 @@
-.formContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 5%;
-}
-.inputWrapper{
-    border: 2px solid;
-    border-radius: 20px;
-    width: 80%;
-    overflow: hidden;
-    background-color: #ffffffa8;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    margin-top: 5%;
-}
-.firstNameContainer{
-    margin-top: 5px;
-}
-.bi-envelope-fill,.bi-key-fill,.bi-person-plus-fill{
-    font-size: 28px;
-}
-.bi-exclamation-lg{
-    color: white;
-    font-size: 16px;
-}
 .errorDiv{
     color: red;
     font-size: 14px;
@@ -34,19 +6,3 @@
     justify-content: left;
 }
 
-.customMarginTop{
-    margin-top: 1%;
-}
-.hidden{
-    visibility: hidden;
-}
-.visible{
-    visibility: visible;
-}
-.passwordStrengthMeter{
-    width: 80%;
-    color: white;
-}
-.backButton{
-    margin-top: 10px;
-}

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import TutorSignupForm from "./TutorSignupForm.jsx";
 
-import "../styles/login.css";
+
 import StudentSignupForm from "./StudentSignupForm.jsx";
 import SigninForm from "./SigninForm.jsx";
 
