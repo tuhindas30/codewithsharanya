@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthProvider";
 
 export const Header = () => {
-  const{signout}=useAuth();
+  const { signout } = useAuth();
   return (
     <nav className="navbar navbar-expand-lg px-5 bg-body-secondary">
       <div className="container-fluid justify-content-between">
@@ -24,13 +24,13 @@ export const Header = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav" style={{ gap: '1rem' }}>
-              <Link className="nav-link position-relative" to="/Student/Notifications">Notifications
+              <Link className="nav-link position-relative" to="/student/notifications">Notifications
                 <span className="position-absolute top-1 translate-middle badge rounded-pill bg-danger">
                   99+
                   <span className="visually-hidden">unread messages</span>
                 </span>
               </Link>
-              <Link className="nav-link" to="/Student/Profile">Profile</Link>
+              <Link className="nav-link" to="/student/profile">Profile</Link>
               <button className="nav-link" onClick={signout}>Logout</button>
             </div>
           </div>
