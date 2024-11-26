@@ -50,7 +50,8 @@ const StudentSignupForm = () => {
         break;
         case "location":
         setFormValues({ ...formValues, location: e.target.value });
-        break;
+        
+break;
         
       case "password":
         setFormValues({ ...formValues, password: e.target.value });
