@@ -50,8 +50,7 @@ const StudentSignupForm = () => {
         break;
         case "location":
         setFormValues({ ...formValues, location: e.target.value });
-        
-break;
+        break;
         
       case "password":
         setFormValues({ ...formValues, password: e.target.value });
@@ -88,8 +87,12 @@ break;
     e.preventDefault();
     console.log(formValues);
     if (!shouldEnableSubmitButton()) return;
-    await signup({ ...formValues, role: "Student" })
-    navigate('/student/home')
+    try{
+      await signup({ ...formValues, role: "Student" })
+      alert('Signup Successful. Please login to continue.');
+    } catch(error){
+      alert(error.message)
+    }
   }
 
   return (

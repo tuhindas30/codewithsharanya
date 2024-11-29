@@ -10,9 +10,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const token = (localStorage?.getItem("__auth_token")) || null;
-  console.log(token);
-//   const user = JSON.parse(localStorage?.getItem("__auth_user")) || null;
-//   const [isUserLoading, setUserLoading] = useState(false);
+  
   const [tokenExpiry, setTokenExpiry] = useState(null);
   const navigate = useNavigate();
   token && setupAuthHeader(token);
@@ -24,7 +22,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (token) {
       try {
-        // setUserLoading(true);
+       
         const decodedToken = jwtDecode(token);
         setTokenExpiry(decodedToken.exp);
         if (decodedToken.exp < Date.now() / 1000) {
@@ -34,7 +32,7 @@ const AuthProvider = ({ children }) => {
         alert(`${err.message}\nPlease sign-in again`);
         signout();
       } finally {
-        //setUserLoading(false);
+        
       }
     }
   }, [token]);
@@ -59,12 +57,12 @@ const AuthProvider = ({ children }) => {
   const signin = async ({ email, password }) => {
     try {
       const response = await authApi.signin(email, password);
-      console.log(response);
+      const decodedToken = jwtDecode(response);
       
-        // localStorage?.setItem(
-        //   "__auth_user",
-        //   JSON.stringify(response.data.user)
-        // );
+        localStorage?.setItem(
+          "__auth_user",
+          JSON.stringify({userId: decodedToken.userId, role: decodedToken.role})
+        );
         localStorage?.setItem(
           "__auth_token",
           response
