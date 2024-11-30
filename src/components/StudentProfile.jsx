@@ -1,10 +1,13 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { BASE_URL } from "../api/helper";
 
 const StudentProfile = () => {
     const [formValues, setFormValues] = useState({
         fullName: "",
         email: "",
         phoneNo: "",
+        location: ""
 
     });
     const [formErrors, setFormErrors] = useState({
@@ -12,7 +15,7 @@ const StudentProfile = () => {
         phoneNo: false,
 
     });
-
+    const user = JSON.parse(localStorage.getItem("__auth_user"))
 
     const emailPattern = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]');
     const pwdPattern = new RegExp("[a-z0-9A-Z][A-Za-z\d@$!%*?&]{6,}");
@@ -41,6 +44,9 @@ const StudentProfile = () => {
                     setFormErrors({ ...formErrors, phoneNo: true });
                 }
                 break;
+            case "location":
+                setFormValues({ ...formValues, location: e.target.value });
+
 
             default:
                 break;
@@ -59,6 +65,22 @@ const StudentProfile = () => {
         if (!shouldEnableSubmitButton()) return;
 
     }
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await axios.get(`${BASE_URL}/auth/students/${user.userId}`)
+                setFormValues({
+                    fullName: response.data.name,
+                    email: response.data.email,
+                    phoneNo: response.data.mobile,
+                    location: response.data.location
+                })
+            } catch (error) {
+                alert(error.message)
+            }
+
+        })()
+    }, [])
     return (
         <>
             <h1 className='text-center mb-5'>Update Student Details</h1>
@@ -114,6 +136,22 @@ const StudentProfile = () => {
                         {formValues.phoneNo && formErrors.phoneNo && <div className="form-text text-danger fst-italic">
                             Please enter 10 digit mobile number.
                         </div>}
+                    </div>
+                    <div>
+                        <label htmlFor="inputLocation" className="form-label">
+                            Location*
+                        </label>
+                        <input
+                            id="inputLocation"
+                            name="location"
+                            className={`form-control ${formValues.location && "is-valid"}`}
+                            type="text"
+                            placeholder="Location"
+                            value={formValues.location}
+                            onChange={handleInputChange}
+                            required
+                        />
+
                     </div>
 
 
